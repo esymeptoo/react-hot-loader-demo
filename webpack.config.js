@@ -1,9 +1,10 @@
 const path = require('path')
 const webpack = require('webpack')
 const htmlWebpackPlugin = require('html-webpack-plugin')
+const mode = process.env.NODE_ENV
 
 module.exports = {
-  mode: 'development',
+  mode,
   entry: [
     'react-hot-loader/patch',
     path.join(__dirname, './src/main.js'),
@@ -15,7 +16,7 @@ module.exports = {
   },
   context: __dirname,
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.jsx', '.js'],
     alias: {
       '@': path.resolve(__dirname, 'src'),
     },
@@ -28,6 +29,24 @@ module.exports = {
         use: {
           loader: 'babel-loader',
         },
+      },
+      {
+        test: /\.css$/,
+        use: 'css-loader',
+      },
+      {
+        test: /\.less/,
+        use: ['style-loader', 'css-loader', {
+          loader: 'postcss-loader',
+          options: {
+            plugins: [require('autoprefixer')({
+              browsers: [
+                'Android > 4',
+                'iOS > 8'
+              ]
+            })]
+          }
+        }, 'less-loader'],
       },
     ],
   },
