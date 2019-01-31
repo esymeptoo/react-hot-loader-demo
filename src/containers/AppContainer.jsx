@@ -20,6 +20,7 @@ export default class AppContainer extends React.Component {
   }
 
   handleFormChange(val) {
+    console.log(val)
     this.setState({
       formData: {
         ...this.state.formData,
@@ -36,7 +37,7 @@ export default class AppContainer extends React.Component {
       <div>
         <TestForm
           formData={this.state.formData}
-          onChange={this.handleFormChange.bind(this)}
+          onValueChange={this.handleFormChange.bind(this)}
         />
       </div>
     </div>

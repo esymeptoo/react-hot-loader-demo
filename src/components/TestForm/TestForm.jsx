@@ -20,11 +20,11 @@ class TestForm extends React.Component {
 
 export default Form.create({
   onChange(props, changedField) {
-    props.onChange(changedField)
+    props.onValueChange(changedField)
   },
   mapPropsToFields(props) {
     return {
-
+      name: props.formData.name,
     }
   },
 })(TestForm)
